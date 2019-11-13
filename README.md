@@ -4,11 +4,11 @@
 |------|----|-------|
 |email|string|null: false|
 |password|string|null: false|
-|nickname|string|null: false, add_index :users,:name,unique:true|
+|name|string|null: false, add_index :users,:name,unique:true|
 ### Association
 - has_many :posts
 - has_many :chatgroup_users
-- has_many :chatgroup
+- has_many :chatgroup,through: :chatgroup_users
 
 ## chatgroup_usersテーブル
 |Column|Type|Options|
@@ -16,13 +16,13 @@
 |user_id|integer|null: false,foreign_key: true|
 |chatgroup_id|integer|null: false,foreign_key: true|
 ### Association
-- has_many :chatgroup
-- has_many :users
+- belongs_to :chatgroup
+- belongs_to :users
 
 ## chatgroupテーブル
 |Column|Type|Options|
 |------|----|-------|
-|nickname|string|null: false|
+|name|string|null: false|
 ### Association
 - has_many :posts
 - has_many :chatgroup_users
